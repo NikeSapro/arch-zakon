@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archimédův zákon 💀🌊 Brainrot Aura Edition</title>
+
+  <style>
+    :root {
+      --bg: #03030b;
+      --glass: rgba(255,255,255,0.08);
+      --glass2: rgba(255,255,255,0.16);
+      --neon: #00fff0;
+      --pink: #ff3df2;
+      --yellow: #ffe600;
+      --red: #ff4b4b;
+      --white: #f3f4ff;
+      --shadow: 0 0 30px rgba(0,255,240,0.25);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, Arial, sans-serif;
+      background: radial-gradient(circle at top, #0c0c24, var(--bg));
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 24px 12px;
+      font-weight: 1000;
+      letter-spacing: 2px;
+      font-size: clamp(20px, 4vw, 44px);
+      text-transform: uppercase;
+      background: linear-gradient(90deg, rgba(0,255,240,0.14), rgba(255,61,242,0.14));
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+
+    header span {
+      color: var(--neon);
+      text-shadow: 0 0 18px rgba(0,255,240,0.65);
+    }
+
+    .sub {
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0.85;
+      margin-top: 6px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      position: relative;
+      overflow: hidden;
+      transition: 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: var(--glass2);
+    }
+
+    h2 {
+      margin: 0 0 8px 0;
+      color: var(--yellow);
+      font-size: 20px;
+      text-shadow: 0 0 14px rgba(255,230,0,0.25);
+    }
+
+    p {
+      margin: 8px 0;
+      line-height: 1.5;
+      opacity: 0.95;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      margin-top: 10px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .formula {
+      font-size: 22px;
+      font-weight: 1000;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(0,0,0,0.45);
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.12);
+      text-shadow: 0 0 12px rgba(0,255,240,0.35);
+      margin-top: 8px;
+    }
+
+    .formula b {
+      color: var(--neon);
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 6px;
+      font-weight: 900;
+      opacity: 0.9;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.35);
+      color: var(--white);
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--neon);
+      box-shadow: 0 0 18px rgba(0,255,240,0.35);
+    }
+
+    .btnRow {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    button {
+      flex: 1;
+      min-width: 150px;
+      padding: 12px;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      font-weight: 1000;
+      font-size: 15px;
+      transition: 0.2s ease;
+    }
+
+    .btnMain {
+      background: linear-gradient(90deg, var(--neon), var(--pink));
+      color: black;
+    }
+
+    .btnMain:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 25px rgba(0,255,240,0.5);
+    }
+
+    .btnGhost {
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .btnGhost:hover {
+      background: rgba(255,255,255,0.18);
+      transform: scale(1.02);
+    }
+
+    .resultBox {
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.15);
+      font-weight: 800;
+    }
+
+    .big {
+      font-size: 22px;
+      font-weight: 1000;
+      color: var(--yellow);
+      text-shadow: 0 0 15px rgba(255,230,0,0.35);
+    }
+
+    .status {
+      margin-top: 10px;
+      font-size: 20px;
+      font-weight: 1000;
+      padding: 10px;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .status.good { color: var(--neon); }
+    .status.bad { color: var(--red); }
+    .status.mid { color: var(--yellow); }
+
+    .bar {
+      margin-top: 10px;
+      height: 18px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .barFill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--neon), var(--pink));
+      transition: 0.5s ease;
+    }
+
+    .auraMeter {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-weight: 900;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .aura {
+      font-size: 22px;
+      margin-top: 6px;
+      color: var(--pink);
+      text-shadow: 0 0 20px rgba(255,61,242,0.45);
+    }
+
+    .sim {
+      margin-top: 14px;
+      height: 270px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, rgba(0,255,240,0.12), rgba(0,0,0,0.9));
+      position: relative;
+    }
+
+    .waterline {
+      position: absolute;
+      top: 35%;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: rgba(0,255,240,0.6);
+      box-shadow: 0 0 25px rgba(0,255,240,0.55);
+    }
+
+    .waves {
+      position: absolute;
+      top: 33%;
+      left: -20%;
+      width: 140%;
+      height: 60px;
+      opacity: 0.35;
+      background: radial-gradient(circle, rgba(0,255,240,0.85) 20%, transparent 70%);
+      animation: waveMove 3s infinite linear;
+      filter: blur(10px);
+    }
+
+    @keyframes waveMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(140px); }
+    }
+
+    .object {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 5%;
+      background: linear-gradient(135deg, rgba(255,230,0,0.95), rgba(255,61,242,0.85));
+      box-shadow: 0 0 25px rgba(255,61,242,0.45);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 34px;
+      font-weight: 1000;
+      transition: top 1.2s cubic-bezier(.18,.9,.25,1);
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -40px;
+      border-radius: 50%;
+      background: rgba(0,255,240,0.55);
+      animation: bubbleUp 4s linear infinite;
+    }
+
+    @keyframes bubbleUp {
+      0% { transform: translateY(0) scale(0.7); opacity: 0; }
+      20% { opacity: 0.75; }
+      100% { transform: translateY(-340px) scale(1.25); opacity: 0; }
+    }
+
+    .notif {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: rgba(0,0,0,0.65);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 18px;
+      padding: 12px 14px;
+      box-shadow: 0 0 25px rgba(255,61,242,0.25);
+      backdrop-filter: blur(14px);
+      font-weight: 900;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: 0.4s ease;
+      z-index: 9999;
+      max-width: 260px;
+      font-size: 13px;
+    }
+
+    .notif.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .shake {
+      animation: shake 0.25s infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(5px); }
+      50% { transform: translateX(-5px); }
+      75% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 14px;
+      opacity: 0.75;
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="notif" id="notif"></div>
+
+  <header>
+    <span>ARCHIMÉD</span> 💀🌊 AURA TEST
+    <div class="sub">brainrot certified physics simulator 🗿</div>
+  </header>
+
+  <div class="container">
+
+    <div class="grid">
+      <div class="card">
+        <h2>📜 Co říká zákon?</h2>
+        <p>
+          Když dáš objekt do kapaliny, kapalina ho tlačí nahoru.
+          Je to jako když tě gym bro vytáhne z vody.
+        </p>
+
+        <div class="formula">
+          <b>F</b><sub>vz</sub> = ρ · g · V
+        </div>
+
+        <p>
+          Jestli je vztlak větší než tíha → plave.<br>
+          Jestli menší → jde do hlubin jak L člověk.
+        </p>
+
+        <div class="tag">WATER NPC BEHAVIOR</div>
+      </div>
+
+      <div class="card">
+        <h2>🗿 Sigma pravidlo</h2>
+        <p>
+          Plaveš = W aura.<br>
+          Potopíš se = L aura.<br>
+          Vznášíš se = sus mode 😳
+        </p>
+        <p>
+          Když ratio &gt; 1 → vztlak vyhrál.<br>
+          Když ratio &lt; 1 → gravitace vyhrála.
+        </p>
+
+        <div class="tag">SIGMA APPROVED</div>
+      </div>
+
+      <div class="card">
+        <h2>🚢 Proč loď nepadá?</h2>
+        <p>
+          Protože loď vytlačí brutálně moc vody → voda jí dá brutálně moc vztlaku.
+        </p>
+        <p>
+          Je to jako kdyby loď měla obří hitbox.
+        </p>
+
+        <div class="tag">HITBOX META</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>⚙️ Aura kalkulačka (W / L detector)</h2>
+
+      <label>Hustota kapaliny ρ (kg/m³)</label>
+      <select id="rhoPreset" onchange="applyPreset()">
+        <option value="1000">Voda (1000)</option>
+        <option value="1025">Mořská voda (1025)</option>
+        <option value="800">Olej (800)</option>
+        <option value="1.2">Vzduch (1.2)</option>
+        <option value="custom">Custom</option>
+      </select>
+      <input type="number" id="rho" value="1000" step="0.1">
+
+      <label>Objem ponořené části V (m³)</label>
+      <input type="number" id="volume" value="0.01" step="0.001">
+
+      <label>Hmotnost objektu (kg)</label>
+      <input type="number" id="mass" value="5" step="0.1">
+
+      <div class="btnRow">
+        <button class="btnMain" onclick="calculate()">CALCULATE AURA 🔥</button>
+        <button class="btnGhost" onclick="resetAll()">RESET 🧼</button>
+      </div>
+
+      <div class="resultBox" id="result">
+        Zadej čísla. Archiméd čeká v chatu.
+      </div>
+
+      <div class="bar">
+        <div class="barFill" id="barFill"></div>
+      </div>
+
+      <div class="auraMeter" id="auraMeter">
+        AURA METER
+        <div class="aura" id="auraText">???</div>
+      </div>
+
+      <div class="sim" id="sim">
+        <div class="waves"></div>
+        <div class="waterline"></div>
+        <div class="object" id="obj">❓</div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    Archimédův zákon ale brainrot verze | 2026 sigma update 🗿
+  </footer>
+
+  <script>
+    const g = 9.81;
+    let streak = 0;
+
+    function spawnBubbles() {
+      const sim = document.getElementById("sim");
+
+      for (let i = 0; i < 16; i++) {
+        const b = document.createElement("div");
+        b.className = "bubble";
+        b.style.left = Math.random() * 100 + "%";
+        const size = 10 + Math.random() * 18;
+        b.style.width = size + "px";
+        b.style.height = size + "px";
+        b.style.animationDuration = (2.5 + Math.random() * 2.5) + "s";
+        b.style.animationDelay = (Math.random() * 1.5) + "s";
+        sim.appendChild(b);
+        setTimeout(() => b.remove(), 6000);
+      }
+    }
+
+    spawnBubbles();
+    setInterval(spawnBubbles, 3200);
+
+    function showNotif(text) {
+      const notif = document.getElementById("notif");
+      notif.innerText = text;
+      notif.classList.add("show");
+
+      setTimeout(() => notif.classList.remove("show"), 2500);
+    }
+
+    function applyPreset() {
+      const preset = document.getElementById("rhoPreset").value;
+      const rhoInput = document.getElementById("rho");
+      if (preset !== "custom") rhoInput.value = preset;
+    }
+
+    function resetAll() {
+      streak = 0;
+      document.getElementById("rhoPreset").value = "1000";
+      document.getElementById("rho").value = 1000;
+      document.getElementById("volume").value = 0.01;
+      document.getElementById("mass").value = 5;
+
+      document.getElementById("result").innerHTML =
+        "Zadej čísla. Archiméd čeká v chatu.";
+
+      document.getElementById("barFill").style.width = "0%";
+      document.getElementById("auraText").innerText = "???";
+      document.getElementById("obj").style.top = "5%";
+      document.getElementById("obj").innerText = "❓";
+
+      document.body.classList.remove("shake");
+      showNotif("RESET complete. aura wiped 🧼");
+    }
+
+    function calculate() {
+      const rho = parseFloat(document.getElementById("rho").value);
+      const V = parseFloat(document.getElementById("volume").value);
+      const mass = parseFloat(document.getElementById("mass").value);
+
+      if (isNaN(rho) || isNaN(V) || isNaN(mass) || rho <= 0 || V <= 0 || mass <= 0) {
+        showNotif("💀 invalid input. bro typed nonsense.");
+        return;
+      }
+
+      const Fvz = rho * g * V;
+      const Fg = mass * g;
+      const ratio = Fvz / Fg;
+
+      const percent = Math.min(160, Math.max(0, ratio * 100));
+      document.getElementById("barFill").style.width = Math.min(100, percent) + "%";
+
+      let verdict = "";
+      let aura = "";
+      let emoji = "😳";
+      let top = "35%";
+
+      document.body.classList.remove("shake");
+
+      if (ratio > 1.05) {
+        streak++;
+        verdict = `PLAVE 🦆 (W) | streak: ${streak}`;
+        aura = `+${Math.floor(ratio * 100)} AURA`;
+        emoji = "🦆";
+        top = "18%";
+        showNotif("WATER RESPECTS YOU 🗿💧");
+      }
+      else if (ratio < 0.95) {
+        streak = 0;
+        verdict = "POTOPÍ SE 🪨 (L) | streak reset 💀";
+        aura = `-${Math.floor((1 - ratio) * 120)} AURA`;
+        emoji = "🪨";
+        top = "72%";
+        document.body.classList.add("shake");
+        showNotif("GRAVITY SAID: NAH 💀");
+      }
+      else {
+        streak = 0;
+        verdict = "VZNÁŠÍ SE 😳 (SUS MODE)";
+        aura = "0 AURA (neutral NPC)";
+        emoji = "😳";
+        top = "35%";
+        showNotif("balanced... suspicious 😳");
+      }
+
+      document.getElementById("result").innerHTML = `
+        💧 Vztlaková síla: <span class="big">${Fvz.toFixed(2)} N</span><br>
+        🌍 Tíhová síla: <span class="big">${Fg.toFixed(2)} N</span><br>
+        📊 Ratio: <span class="big">${ratio.toFixed(2)}</span><br>
+        <div class="status">${verdict}</div>
+      `;
+
+      document.getElementById("auraText").innerText = aura;
+
+      const obj = document.getElementById("obj");
+      obj.style.top = top;
+      obj.innerText = emoji;
+    }
+  </script>
+
+</body>
+</html>
