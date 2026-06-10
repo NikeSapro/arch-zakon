@@ -1,49 +1,185 @@
 body {
-    font-family: sans-serif;
-    background-color: #e0f2fe; /* Světle modrá jako voda */
+    font-family: 'Consolas', 'Courier New', monospace;
+    background-color: #030712;
+    color: #f3f4f6;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.lab-wrapper {
+    max-width: 900px;
+    width: 100%;
+}
+
+header {
     text-align: center;
-    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.badge {
+    background: #1e1b4b;
+    color: #818cf8;
+    padding: 5px 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid #3730a3;
+    margin-bottom: 10px;
 }
 
 h1 {
-    color: #0369a1;
+    font-size: 2.8rem;
+    margin: 0;
+    letter-spacing: 2px;
 }
 
-.uvod {
-    font-size: 1.2rem;
-    color: #334155;
+.neon-text {
+    color: #06b6d4;
+    text-shadow: 0 0 15px rgba(6, 182, 212, 0.7);
 }
 
-button {
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+@media (max-width: 768px) {
+    .grid-layout { grid-template-columns: 1fr; }
+}
+
+.control-panel, .display-panel {
+    background: #0f172a;
+    border: 2px solid #1e293b;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+h2, h3 {
+    margin-top: 0;
+    color: #f3f4f6;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 10px;
+}
+
+.slider-box {
+    margin: 25px 0;
+}
+
+.slider-box label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #9ca3af;
+}
+
+.slider-box span {
+    color: #06b6d4;
     font-size: 1.2rem;
-    padding: 15px 25px;
-    margin: 10px;
-    border: none;
-    border-radius: 10px;
-    background-color: #0284c7;
-    color: white;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: #06b6d4;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #0369a1; /* Při najetí myší ztmavne */
+.preset-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-#vysledek-box {
-    background-color: white;
-    max-width: 400px;
-    margin: 30px auto;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.preset-buttons button {
+    background: #1e293b;
+    color: white;
+    border: 1px solid #334155;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
 }
 
-#emoji {
-    font-size: 5rem; /* Obří emoji */
-    margin: 20px 0;
-}
-
-#vysledek-text {
-    font-size: 1.1rem;
+.preset-buttons button:hover {
+    background: #06b6d4;
+    color: #030712;
     font-weight: bold;
+}
+
+.display-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.screen-header {
+    font-size: 0.8rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px #22c55e;
+}
+
+#graphic-status {
+    font-size: 5.5rem;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.metric {
+    margin: 15px 0;
+}
+
+.metric span {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.bar-bg {
+    background: #1e293b;
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+}
+
+.red-bar { background: #ef4444; box-shadow: 0 0 10px #ef4444; }
+.green-bar { background: #22c55e; box-shadow: 0 0 10px #22c55e; }
+
+.state-float { border-color: #22c55e; background: linear-gradient(135deg, #0f172a, #062f19); }
+.state-sink { border-color: #ef4444; background: linear-gradient(135deg, #0f172a, #451a1a); }
+
+#verdict-title {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+#verdict-desc {
+    color: #d1d5db;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
